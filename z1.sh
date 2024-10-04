@@ -6,7 +6,7 @@ verificar_binario() {
     RUTA_BINARIO="$(readlink -f "$0")"
 
     # Firma esperada en hexadecimal (puedes cambiarla según necesites)
-    FIRMA_ESPERADA="6a6f617175696e"
+    FIRMA_ESPERADA="006a6f617175696e"
 
     if [[ ! -f "$RUTA_BINARIO" ]]; then
         echo "El archivo '$RUTA_BINARIO' no existe."
