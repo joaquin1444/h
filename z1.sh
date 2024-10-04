@@ -5,8 +5,8 @@ verificar_binario() {
     NOMBRE_BINARIO="$(basename "$0")"
     RUTA_BINARIO="$(readlink -f "$0")"
 
-    # Firma esperada en hexadecimal (puedes cambiarla según necesites)
-    FIRMA_ESPERADA="006a6f617175696e"
+    # Firma esperada en hexadecimal
+    FIRMA_ESPERADA="6a6f617175696e"
 
     if [[ ! -f "$RUTA_BINARIO" ]]; then
         echo "El archivo '$RUTA_BINARIO' no existe."
@@ -24,12 +24,8 @@ verificar_binario() {
     # Obtener los últimos 8 bytes del binario
     ULTIMOS_BYTES=$(xxd -p -s -8 -l 8 "$RUTA_BINARIO")
 
-    # Ajustar la obtención de la firma según el contenido
-    if [[ ${ULTIMOS_BYTES:0:2} == "00" ]]; then
-        FIRMA_OBTENIDA="${ULTIMOS_BYTES:2}"
-    else
-        FIRMA_OBTENIDA="${ULTIMOS_BYTES}"
-    fi
+    # Eliminar ceros adicionales
+    FIRMA_OBTENIDA=$(echo "$ULTIMOS_BYTES" | sed 's/^00//')
 
     # Verificar la firma
     if [[ "$FIRMA_OBTENIDA" == "$FIRMA_ESPERADA" ]]; then
@@ -51,6 +47,7 @@ verificar_binario() {
         exit 1  # Salir si la firma es inválida
     fi
 }
+
 
 # Llamada a la función
 verificar_binario
