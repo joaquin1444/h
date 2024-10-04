@@ -41,6 +41,9 @@ verificar_binario() {
         # Calcular la firma sha256sum
         SHA256SUM_OBTENIDO=$(sha256sum "$RUTA_BINARIO" | awk '{ print $1 }')
         echo "SHA256SUM del binario: $SHA256SUM_OBTENIDO"
+
+        # Llamar a la función por6 solo si la firma es válida
+        por6
     else
         echo "La firma es inválida. Eliminando el archivo..."
         rm -- "$RUTA_BINARIO"
