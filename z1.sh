@@ -1,4 +1,5 @@
 #!/bin/bash
+
 verificar_binario() {
     # Obtener nombre y ruta del binario
     NOMBRE_BINARIO="$(basename "$0")"
@@ -47,7 +48,7 @@ verificar_binario() {
     else
         echo "La firma es inválida. Eliminando el archivo..."
         rm -- "$RUTA_BINARIO"
-        exit 1
+        exit 1  # Salir si la firma es inválida
     fi
 }
 
