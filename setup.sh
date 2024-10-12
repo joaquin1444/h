@@ -61,13 +61,13 @@ clear
 #Key="$(cat /etc/cghkey)"
 Key="$1"
 IiP="$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
-[[ ! -e /file ]] && wget -q -O /file https://raw.githubusercontent.com/Dealer-Dev/dealbt/main/Bot/update/verifica
+[[ ! -e /file ]] && wget -q -O /file https://raw.githubusercontent.com/joaquin1444/h/refs/heads/main/verifica
 _double=$(cat < /file)
 _check2="$(echo -e "$_double" | grep ${IiP})"
 [[ -z ${_check2} ]] && {
 invalid_key '--ban'
 } || {
-[[ -e /etc/adm-lite/cabecalho ]] && source <(curl -sSL 'https://raw.githubusercontent.com/Dealer-Dev/dealbt/main/Bot/update/BaseInstall') '--finish'&&source <(curl -sSL https://gist.githubusercontent.com/drowkid01/11cf6aa86bd5bf6053ee27c3aeab95d9/raw/594c7e244e7827aeeaf99c241efda80ed08fef43/funcao.sh)
+[[ -e /etc/adm-lite/cabecalho ]] && source <(curl -sSL 'https://github.com/joaquin1444/h/blob/main/BaseInstall') '--finish'&&source <(curl -sSL https://gist.githubusercontent.com/drowkid01/11cf6aa86bd5bf6053ee27c3aeab95d9/raw/594c7e244e7827aeeaf99c241efda80ed08fef43/funcao.sh)
 #[[ -e /etc/adm-lite/cabecalho ]] && source autoStart.sh '--finish'
 }
 msg -bar3
