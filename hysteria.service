@@ -1,5 +1,5 @@
 [Unit]
-Description=HysteriaUDP MOD Service BY @ChumoGH
+Description=HysteriaUDP MOD Service BY @joaquinH2
 After=network.target
 
 [Service]
