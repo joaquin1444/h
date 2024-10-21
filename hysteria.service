@@ -10,11 +10,11 @@ Group=root
 ExecStartPost=sysctl -w net.ipv4.ip_forward=1
 
 # Configuración de iptables para el tráfico UDP
-ExecStartPost=iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpcustom" -j DNAT --to-destination :36712
+ExecStartPost=iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpmod" -j DNAT --to-destination :36712
 ExecStartPost=iptables -A INPUT -p udp -m udp --dport 36712 -m comment --comment "udpmod" -j ACCEPT
 
 # Eliminar las reglas de iptables al detener el servicio
-ExecStopPost=iptables -t nat -D PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpcustom" -j DNAT --to-destination :36712
+ExecStopPost=iptables -t nat -D PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpmod" -j DNAT --to-destination :36712
 ExecStopPost=iptables -D INPUT -p udp -m udp --dport 36712 -m comment --comment "udpmod" -j ACCEPT
 
 # Configuración del directorio de trabajo y entorno
