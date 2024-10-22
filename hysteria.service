@@ -6,27 +6,19 @@ After=network.target
 User=root
 Group=root
 
-# Habilitar el reenvío de IP
+
 ExecStartPre=/sbin/sysctl -w net.ipv4.ip_forward=1
 
-# Configuración de iptables para el tráfico UDP
-ExecStartPost=/sbin/iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpmod" -j DNAT --to-destination :36712
-ExecStartPost=/sbin/iptables -A INPUT -p udp -m udp --dport 36712 -m comment --comment "udpmod" -j ACCEPT
-
-# Eliminar las reglas de iptables al detener el servicio
-ExecStopPost=/sbin/iptables -t nat -D PREROUTING -i eth0 -p udp -m udp --dport 1:65535 -m comment --comment "udpmod" -j DNAT --to-destination :36712
-ExecStopPost=/sbin/iptables -D INPUT -p udp -m udp --dport 36712 -m comment --comment "udpmod" -j ACCEPT
-
-# Configuración del directorio de trabajo y entorno
 WorkingDirectory=/etc/adm-lite/HYSTERIA
 Environment="PATH=/etc/adm-lite/HYSTERIA:/usr/bin:/bin"
 
-# Comando para iniciar el servicio
+
 ExecStart=/bin/hysteria -config /etc/adm-lite/HYSTERIA/config.json server
 
-# Reiniciar el servicio si falla
+
 Restart=on-failure
 RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
+
