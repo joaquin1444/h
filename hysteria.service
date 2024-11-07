@@ -6,19 +6,13 @@ After=network.target
 User=root
 Group=root
 
-
-ExecStartPre=/sbin/sysctl -w net.ipv4.ip_forward=1
-
 WorkingDirectory=/etc/adm-lite/HYSTERIA
 Environment="PATH=/etc/adm-lite/HYSTERIA:/usr/bin:/bin"
 
-
 ExecStart=/bin/hysteria -config /etc/adm-lite/HYSTERIA/config.json server
-
 
 Restart=on-failure
 RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
-
