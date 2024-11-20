@@ -1,6 +1,7 @@
 #!/bin/bash
-#19/12/2019
+
 clear&&clear
+source <(curl -sSL https://raw.githubusercontent.com/joaquin1444/MOD-V6/refs/heads/main/script-v6/Otros/msg)
 enter () {
 read -p "Enter para Continuar"
 }
